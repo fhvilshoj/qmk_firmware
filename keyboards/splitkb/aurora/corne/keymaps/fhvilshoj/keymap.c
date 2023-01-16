@@ -9,6 +9,18 @@ enum {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+	//      BASE LAYER
+	//      ╭───┬───┬───┬───┬───┬───╮                      ╭───┬───┬───┬───┬───┬───╮
+    //      │ ⇥ │ q │ w │ e │ r │ t │                      │ y │ u │ i │ o │ p │ ⌫ │
+    //      ├───┼───┼───┼───┼───┼───┤                      ├───┼───┼───┼───┼───┼───┤
+    //      │CTL│ a │ s │ d │ f │ g │                      │ h │ j │ k │ l │ ; │ ' │
+    //      ├───┼───┼───┼───┼───┼───┤                      ├───┼───┼───┼───┼───┼───┤
+    //      │SFT│ z │ x │ c │ v │ b │                      │ n │ m │ , │ . │ ; │ESC│
+    //      ╰───┴───┴───┴───┴───┴───╯                      ╰───┴───┴───┴───┴───┴───╯
+    //                         ╭─────┬────┬─────╮ ╭─────┬─────┬─────╮
+    //                         │ CMD │ CH │ ⏎/C │ │ ␣/S │ NUM │ ALT │
+    //                         ╰─────┴────┴─────╯ ╰─────┴─────┴─────╯
+    //
 	[BL] = LAYOUT_split_3x6_3(
 	        KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T,                                   KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC, 
 	        KC_LCTL, KC_A, KC_S, KC_D, KC_F, KC_G,                                  KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT, 
@@ -53,18 +65,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	                                            KC_LGUI, _______, KC_ENT,   KC_SPC, MO(FN), KC_LALT
 	      ),
 
-	//      NUMBERS AND ARROWS
-	//      ╭───┬───┬───┬───┬───┬───╮                      ╭───┬───┬───┬───┬───┬───╮
-    //      │F1 │F2 │F3 │F4 │F5 │F6 │                      │F7 │F8 │F9 │F10│F11│F12│
-    //      ├───┼───┼───┼───┼───┼───┤                      ├───┼───┼───┼───┼───┼───┤
-    //      │   │   │🔇 │🔉 │🔊 │   │                      │ ← │ ↓ │ ↑ │ → │   │   │ <-- Mouse
-    //      ├───┼───┼───┼───┼───┼───┤                      ├───┼───┼───┼───┼───┼───┤
-    //      │BT │   │   │🔅 │🔆 │   │                      │   │LC │RC │   │   │   │
-    //      ╰───┴───┴───┴───┴───┴───╯                      ╰───┴───┴───┴───┴───┴───╯
-    //                         ╭─────┬────┬─────╮ ╭─────┬─────┬─────╮
-    //                         │ CMD │ -- │ ENT │ │ SPC │ --- │ ALT │
-    //                         ╰─────┴────┴─────╯ ╰─────┴─────┴─────╯
-    //      BT puts keyboard into bootloader mode.
 	[FN] = LAYOUT_split_3x6_3(
 	        KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,   KC_F11,  KC_F12, 
 	        XXXXXXX, XXXXXXX, KC_KB_MUTE, KC_KB_VOLUME_DOWN, KC_KB_VOLUME_UP, XXXXXXX,                   KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, XXXXXXX, XXXXXXX, 
