@@ -1,2 +1,1 @@
 COMB(JK_ESC,  KC_ESC,   KC_J, KC_K)
-TOGG(ZT_DK,   DK,       KC_Z, KC_T)
