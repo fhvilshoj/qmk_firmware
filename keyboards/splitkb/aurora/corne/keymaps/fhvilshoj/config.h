@@ -1,4 +1,4 @@
-#define IGNORE_MOD_TAP_INTERRUPT
+// #define IGNORE_MOD_TAP_INTERRUPT
 #define TAPPING_TERM 250  // 2023-01-26 21:17 Try to increase it to avoid comand space fuckups
 #define PERMISSIVE_HOLD
 #define TAPPING_FORCE_HOLD
