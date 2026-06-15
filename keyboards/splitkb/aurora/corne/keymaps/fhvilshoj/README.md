@@ -11,13 +11,19 @@
 │  ⇥  │ q │ w │ e │ r │ t │             │ y │ u │ i │ o │ p │ ⌫ │
 ├─────┼───┼───┼───┼───┼───┤             ├───┼───┼───┼───┼───┼───┤
 │ CTL │ a │ s │ d │ f │ g │             │ h │ j │ k │ l │ ; │ ' │
+│     │ ⌘ │ ⌥ │ ⇧ │ ⌃ │   │             │   │ ⌃ │ ⇧ │ ⌥ │ ⌘ │   │
 ├─────┼───┼───┼───┼───┼───┤             ├───┼───┼───┼───┼───┼───┤
 │ SFT │ z │ x │ c │ v │ b │             │ n │ m │ , │ . │ ; │ESC│
 ╰─────┴───┴───┴───┴───┴───╯             ╰───┴───┴───┴───┴───┴───╯
                ╭─────┬────┬─────╮ ╭─────┬─────┬─────╮
-               │ CMD │ CH │ ⏎/C │ │ ␣/S │ NUM │ ALT │
+               │ CMD │ CH │ ⏎/C │ │ ␣  │ NUM │ ALT │
                ╰─────┴────┴─────╯ ╰─────┴─────┴─────╯
 ```
+
+Home-row mods are symmetric (same finger → same mod on both hands):
+pinky=⌘ Cmd, ring=⌥ Opt, middle=⇧ Shift, index=⌃ Ctrl. The `w`/`e` top-row
+mod-taps are gone, and Shift is off the right thumb (Space is now a plain tap) —
+shifting moves to the middle-finger home-row mod.
 
 
 ### NUMBERS AND ARROWS (NUM)

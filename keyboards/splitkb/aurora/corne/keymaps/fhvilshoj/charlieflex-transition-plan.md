@@ -32,7 +32,7 @@ time, so my hands reorganize around the smaller set before the new board arrives
 4. **Inner index column loses one key per hand** (`B` / `N` relocate).
 5. **More reliance on combos** to recover `TAB`, `'`, `B`, `N`, etc. (`jk → ESC` combo already exists and stays.)
 
-### What this plan can NOT rehearse
+### Whats this plan can NOT rehearse
 The Charlieflex's physical **splay and lowered-pinky stagger**. The Corne's columns stay put, so the *logical* model will be identical but the fingertips will feel the geometry on day one. That's a comfort adjustment, not a re-learning.
 
 ---
@@ -47,11 +47,14 @@ The Charlieflex's physical **splay and lowered-pinky stagger**. The Corne's colu
 ## Step 1 — Symmetric home-row mods; kill the top-row mods
 **Goal:** both hands modify independently (required once the outer mod column is gone).
 
-- [ ] Mirror left-hand GASC onto the right home row (same finger → same mod):
+- [x] Mirror left-hand GASC onto the right home row (same finger → same mod):
   ```
   J = RCTL_T(KC_J)   K = RSFT_T(KC_K)   L = RALT_T(KC_L)   ; = RGUI_T(KC_SCLN)
   ```
-- [ ] Revert top-row mod-taps to plain letters: `RCTL_T(KC_W) → KC_W`, `RALT_T(KC_E) → KC_E`.
+- [x] Revert top-row mod-taps to plain letters: `RCTL_T(KC_W) → KC_W`, `RALT_T(KC_E) → KC_E`.
+- [x] **Drop Shift-on-Space thumb** (`MT(MOD_LSFT, KC_SPC) → KC_SPC`): pulled
+  forward from Step 4 so shifting moves to the new middle-finger home-row mod
+  immediately, while the motor change is already being learned.
 - [ ] Run for the **longest** stretch of any step — this is the deepest motor change.
 
 *Safe to do first: it's additive (gain right-hand mods, lose nothing essential).*
@@ -65,6 +68,14 @@ The Charlieflex's physical **splay and lowered-pinky stagger**. The Corne's colu
 - [ ] **TAB → left-hand combo** (e.g. `Q`+`W`) in the combo generator.
 - [ ] **`'` → combo** (e.g. `L`+`;`) — too frequent for contractions to bury on a deep layer.
 - [ ] Consciously start reaching for the new homes. Outer keys still work as backup.
+
+> ⚠️ **Combos must use the home-row-mod keycode, not the bare letter.** QMK matches
+> combos against the *exact* keycode sitting in the keymap at each position. Since
+> Step 1, `j k l ;` are mod-taps, so a combo over them needs the wrapped form —
+> e.g. `RALT_T(KC_L), RGUI_T(KC_SCLN)` for `l+;`, **not** `KC_L, KC_SCLN`. Using the
+> bare letter compiles fine but the combo silently never fires. (This is exactly
+> what broke `jk → ESC` after Step 1.) `q+w` is safe as plain `KC_Q, KC_W` — those
+> aren't mods. Rule of thumb: if either key in a combo is a home-row mod, wrap it.
 
 ---
 
@@ -143,13 +154,55 @@ letter underneath; identical across Corne, Charlieflex, and future splits.*
 
 **End state:** the Corne is *logically* a ~32-key board — 5 columns, inner index of 2, three thumbs, symmetric home-row mods, combos for TAB/`'`/ESC/B/N, BSPC/SPC/ENT/layers on thumbs. **This is the Charlieflex mental model**, on hardware I've used the whole time.
 
+### Target layout — the 32-key mental model (base layer)
+
+What the hands actually use once all five steps land. Only live keys are drawn;
+the Corne's outer pinky column, the two inner-index bottoms, and three thumbs are
+gone. Home-row mods are symmetric (same finger → same mod on both hands).
+
+```
+╭───┬───┬───┬───┬───╮             ╭───┬───┬───┬───┬───╮
+│ q │ w │ e │ r │ t │             │ y │ u │ i │ o │ p │
+├───┼───┼───┼───┼───┤             ├───┼───┼───┼───┼───┤
+│ a │ s │ d │ f │ g │             │ h │ j │ k │ l │ ; │
+│ ⌘ │ ⌥ │ ⇧ │ ⌃ │   │             │   │ ⌃ │ ⇧ │ ⌥ │ ⌘ │
+├───┼───┼───┼───┼───┤             ├───┼───┼───┼───┼───┤
+│ z │ x │ c │ v │   │             │   │ m │ , │ . │ / │
+╰───┴───┴───┴───┴───╯             ╰───┴───┴───┴───┴───╯
+          ╭──────┬────────╮ ╭────────╮
+          │  ⌫   │ ⏎ · CH │ │ ␣ · NUM│
+          ╰──────┴────────╯ ╰────────╯
+          (2 left thumbs)    (1 right thumb)
+```
+
+- **Home-row mods** (hold): pinky=⌘ · ring=⌥ · middle=⇧ · index=⌃, both hands.
+- **Thumbs** (tap · hold):
+  - left outer → `⌫` BSPC (plain tap)
+  - left inner → `⏎` Enter · hold = **CH** symbols layer
+  - right     → `␣` Space · hold = **NUM** numbers/arrows layer
+  - hold **CH + NUM together** → **FN** layer (tri-layer)
+- **Combos** recover everything the lost keys did:
+
+  | Combo | Sends | Recovers |
+  |-------|-------|----------|
+  | `q`+`w` | `⇥` TAB | killed outer column |
+  | `l`+`;` | `'` quote | killed outer column |
+  | `j`+`k` | `ESC` | (already exists) |
+  | _tbd_ | `b` | trimmed inner-index |
+  | _tbd_ | `n` | trimmed inner-index |
+  | _tbd_ | one-shot **APPS** (Hyper) | killed Hyper/Alt thumb |
+
+> The one thing this picture can't show is *feel*: on the Charlieflex the pinky
+> column sits lower and the whole board splays outward. The logical model above is
+> identical — only the fingertips will notice the geometry on day one.
+
 ---
 
 ## Progress tracker
 
 | Step | Change | Started | "Feels normal" | Notes |
 |------|--------|---------|----------------|-------|
-| 1 | Symmetric HRM + drop top-row mods | | | |
+| 1 | Symmetric HRM + drop top-row mods | 2026-06-15 | | Right home row now CTL/SFT/ALT/GUI on j/k/l/;; w/e top-row mods reverted to plain; Shift-on-Space thumb dropped (pulled fwd from Step 4) |
 | 2 | Pre-place TAB / BSPC / `'` | | | |
 | 3 | Disable outer pinky column | | | |
 | 4 | Six thumbs → three | | | Hyper → one-shot Apps layer (`OSL(APPS)` on a combo) |
