@@ -64,9 +64,10 @@ The Charlieflex's physical **splay and lowered-pinky stagger**. The Corne's colu
 ## Step 2 — Pre-place TAB, BSPC, and `'` (keep old keys as a crutch)
 **Goal:** give the three genuine casualties their Charlieflex homes while the outer column still works.
 
-- [ ] **BSPC → left outer thumb** (currently plain `LGUI`; Gui is now covered by `A` and `;` home-row mods).
-- [ ] **TAB → left-hand combo** (e.g. `Q`+`W`) in the combo generator.
-- [ ] **`'` → combo** (e.g. `L`+`;`) — too frequent for contractions to bury on a deep layer.
+- [x] **BSPC → left outer thumb** (was plain `LGUI`; Gui is now covered by `A` and `;` home-row mods).
+- [x] **TAB → left-hand combo** `Q`+`W` (`COMB(QW_TAB, KC_TAB, KC_Q, KC_W)`).
+- [x] **`'` → combo** `L`+`;` (`COMB(LSCLN_QUOT, KC_QUOT, RALT_T(KC_L), RGUI_T(KC_SCLN))` — mod-tap keycodes per the Step 2 caveat).
+- [x] **Disabled the base-layer `TAB` and `'` keys early** (`XXXXXXX`) — pulled forward from Step 3 to force the combos immediately. Outer `CTL`/`SFT`/`RALT`/`BSPC` stay as crutches; only TAB and `'` go dark for now.
 - [ ] Consciously start reaching for the new homes. Outer keys still work as backup.
 
 > ⚠️ **Combos must use the home-row-mod keycode, not the bare letter.** QMK matches
@@ -203,8 +204,8 @@ gone. Home-row mods are symmetric (same finger → same mod on both hands).
 | Step | Change | Started | "Feels normal" | Notes |
 |------|--------|---------|----------------|-------|
 | 1 | Symmetric HRM + drop top-row mods | 2026-06-15 | | Right home row now CTL/SFT/ALT/GUI on j/k/l/;; w/e top-row mods reverted to plain; Shift-on-Space thumb dropped (pulled fwd from Step 4) |
-| 2 | Pre-place TAB / BSPC / `'` | | | |
-| 3 | Disable outer pinky column | | | |
+| 2 | Pre-place TAB / BSPC / `'` | 2026-06-15 | | BSPC→left outer thumb; TAB→`qw` combo; `'`→`l;` combo. Base-layer TAB+`'` disabled early (rest of outer column still live) |
+| 3 | Disable outer pinky column | | | TAB + `'` already done in Step 2; remaining: `CTL`/`SFT`/`RALT` + old outer BSPC |
 | 4 | Six thumbs → three | | | Hyper → one-shot Apps layer (`OSL(APPS)` on a combo) |
 | 5 | Trim inner index column | | | |
 
