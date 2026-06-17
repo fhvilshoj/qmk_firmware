@@ -65,7 +65,7 @@ The Charlieflex's physical **splay and lowered-pinky stagger**. The Corne's colu
 **Goal:** give the three genuine casualties their Charlieflex homes while the outer column still works.
 
 - [x] **BSPC → left outer thumb** (was plain `LGUI`; Gui is now covered by `A` and `;` home-row mods).
-- [x] **TAB → left-hand combo** `Q`+`W` (`COMB(QW_TAB, KC_TAB, KC_Q, KC_W)`).
+- [x] **TAB → left-hand combo** — now `S`+`D` (`COMB(SD_TAB, KC_TAB, LALT_T(KC_S), LSFT_T(KC_D))`); moved off `Q`+`W` because the home-row pair is comfier and `Q`+`W` freed up for **Caps Word** (`COMB(QW_CAPS, CW_TOGG, KC_Q, KC_W)`, needs `CAPS_WORD_ENABLE`) — handy since home-row-mod Shift makes long runs of capitals awkward; auto-cancels at word end and keeps `_`/digits (ideal for `SCREAMING_SNAKE`). `S`+`D` chosen over the `A`+`S` mirror of `'` because `as/ask/last/fast` would misfire as TAB; `sd` is a near-nonexistent bigram.
 - [x] **`'` → combo** `L`+`;` (`COMB(LSCLN_QUOT, KC_QUOT, RALT_T(KC_L), RGUI_T(KC_SCLN))` — mod-tap keycodes per the Step 2 caveat).
 - [x] **Disabled the base-layer `TAB` and `'` keys early** (`XXXXXXX`) — pulled forward from Step 3 to force the combos immediately. Outer `CTL`/`SFT`/`RALT`/`BSPC` stay as crutches; only TAB and `'` go dark for now.
 - [ ] Consciously start reaching for the new homes. Outer keys still work as backup.
@@ -85,10 +85,32 @@ The Charlieflex's physical **splay and lowered-pinky stagger**. The Corne's colu
 
 - [ ] No-op all six outer positions:
   ```
-  left  outer:  TAB → XXXXXXX   LCTL → XXXXXXX   LSFT → XXXXXXX
-  right outer:  BSPC → XXXXXXX   '   → XXXXXXX   RALT → XXXXXXX
+  left  outer:  TAB → XXXXXXX✓   LCTL → XXXXXXX    LSFT → XXXXXXX
+  right outer:  BSPC → XXXXXXX    '   → XXXXXXX✓   RALT → XXXXXXX✓
   ```
+  (✓ = already done — TAB & `'` in Step 2, RALT below.)
 - [ ] Moment-of-truth step. If too jarring, revert a single line. Usually lands within days because Step 2 pre-placed the homes.
+- [ ] **Outer column spans every layer**, not just base. The CH (symbol) layer's outer
+  column held `_` and `` ` `` — now relocated to CH-layer combos (`l;`=`_`, `./`=`` ` ``).
+  Old CH outer positions kept as crutches until the combos are confirmed, then `XXXXXXX`.
+  NUM outer column is mods/TAB/BSPC (all redundant) → just no-op when disabling.
+- [x] **FN layer outer column cleared.** The only irreplaceable keys there were `QK_BOOT`,
+  `F1`, `F12`. Relocated inward: `F1`→under `F2`, `F12`→under `F11`, `QK_BOOT`→one right.
+  FN outer (col 0 / col 11) is now fully `XXXXXXX`. (`F2`–`F11` already lived on the inner 5.)
+
+### 🌐 Globe / `fn` — resolved: **mod-tap on the left thumb**
+The bottom-right `RALT` was my macOS Globe key (Right-Alt → 🌐 remapped in *Keyboard →
+Modifier Keys*; QMK can't emit Apple's Globe HID usage, so it just sends `RALT`).
+Disabling the outer column kills that corner, so Globe needs a holdable home that
+chords with the NUM-layer arrows (window tiling = 🌐 + Ctrl + arrow).
+
+- [x] **Left outer thumb → `RALT_T(KC_BSPC)`** (tap = `⌫` BSPC, hold = 🌐 Globe).
+- [x] **Disable the old `RALT` corner** (`XXXXXXX`).
+- Tiling chord splits across both hands, no collisions: 🌐(left thumb) +
+  Ctrl(`f`, a plain mod on the NUM layer) + NUM(right thumb) + arrow(right hand).
+  Also covers `fn`+arrows (Home/End/PgUp/Dn), `fn`+Delete, emoji, etc.
+- **Tradeoff:** Backspace is now **tap-only** (the hold is Globe) — no hold-to-repeat.
+  Revisit with a layer'd delete-word if that bites.
 
 ---
 
@@ -100,11 +122,15 @@ Current cluster: `GUI · MO(CH) · Ctrl/Enter` ‖ `Shift/Space · MO(NUM) · Hy
 - [ ] Re-map to layer-taps + tri-layer:
   ```
   left  inner thumb:  LT(CH, KC_ENT)     // symbols on hold, Enter on tap
-  left  outer thumb:  KC_BSPC            // already moved here in Step 2
+  left  outer thumb:  RALT_T(KC_BSPC)    // Globe on hold / BSPC on tap — set in Step 3, untouched here
   right thumb:        LT(NUM, KC_SPC)    // numbers on hold, Space on tap
   FN layer:           tri-layer — hold CH + NUM together to reach FN
   ```
 - [ ] Disable the two now-unused thumb positions (`XXXXXXX`).
+
+*No conflict with the Step 3 Globe change: the left outer thumb is one of the three
+survivors — Step 4 only folds the layer-hold thumbs (`MO(CH)`, `Ctrl/Enter`,
+`MO(NUM)`, `Hyper/Alt`) into layer-taps. The Globe mod-tap rides through unchanged.*
 
 *Shift-on-Space and Ctrl-on-Enter holds being dropped are already covered by the new symmetric home-row mods.*
 
@@ -112,16 +138,17 @@ Current cluster: `GUI · MO(CH) · Ctrl/Enter` ‖ `Shift/Space · MO(NUM) · Hy
 Hyper is used aggressively for app switching and must stay ergonomic. Don't hold a
 four-mod chord — tap a one-shot into a layer where each key sends the full Hyper combo.
 With only 3 thumbs (all used) and the outer column gone, there's no spare key, so the
-one-shot lives on a **combo** — costing zero keys and keeping `BSPC` a clean tap.
+one-shot lives on a **combo** — costing zero keys.
 
-- [ ] Keep the **left-outer thumb** as plain `KC_BSPC` (no layer-tap needed now).
+- [ ] Leave the **left-outer thumb** as `RALT_T(KC_BSPC)` (Globe/BSPC, set in Step 3) — no further change needed here.
 - [ ] Trigger the Apps layer as a **one-shot on a combo** (tap combo → tap app → fires once):
   ```c
   // QMK: OSL(APPS) on a combo (define in keymap_combo.h / combo source)
   // ZMK: &sl APPS on a combo
   ```
-  Default combo: a comfortable, low-misfire pair (e.g. two adjacent non-mod keys like
-  `C`+`V`, or both left thumbs). Combo position is easy to move — tune later.
+  Default combo: a comfortable, low-misfire pair of **non-mod-tap** keys (e.g. `C`+`V`).
+  Avoid "both left thumbs" now that the left outer is a Globe mod-tap — chording it
+  is fiddlier than two plain keys. Combo position is easy to move — tune later.
 - [ ] Add an `APPS` layer. Put **most-used apps on home row** as discrete Hyper combos;
   fill the rest so any key = `Hyper`+itself (keeps ad-hoc Hyper available):
   ```c
@@ -170,25 +197,30 @@ gone. Home-row mods are symmetric (same finger → same mod on both hands).
 ├───┼───┼───┼───┼───┤             ├───┼───┼───┼───┼───┤
 │ z │ x │ c │ v │   │             │   │ m │ , │ . │ / │
 ╰───┴───┴───┴───┴───╯             ╰───┴───┴───┴───┴───╯
-          ╭──────┬────────╮ ╭────────╮
-          │  ⌫   │ ⏎ · CH │ │ ␣ · NUM│
-          ╰──────┴────────╯ ╰────────╯
-          (2 left thumbs)    (1 right thumb)
+          ╭──────────┬────────╮ ╭────────╮
+          │ 🌐 · ⌫   │ ⏎ · CH │ │ ␣ · NUM│
+          ╰──────────┴────────╯ ╰────────╯
+          (2 left thumbs)        (1 right thumb)
 ```
 
 - **Home-row mods** (hold): pinky=⌘ · ring=⌥ · middle=⇧ · index=⌃, both hands.
 - **Thumbs** (tap · hold):
-  - left outer → `⌫` BSPC (plain tap)
+  - left outer → `⌫` BSPC (tap) · **🌐 Globe / RALT** (hold) — tap-only BSPC, no hold-repeat
   - left inner → `⏎` Enter · hold = **CH** symbols layer
   - right     → `␣` Space · hold = **NUM** numbers/arrows layer
   - hold **CH + NUM together** → **FN** layer (tri-layer)
+- **Window tiling** = 🌐(left thumb) + Ctrl(`f`) + NUM(right thumb) + arrow. macOS
+  remaps Right-Alt → 🌐 in *Keyboard → Modifier Keys*; firmware just sends `RALT`.
 - **Combos** recover everything the lost keys did:
 
   | Combo | Sends | Recovers |
   |-------|-------|----------|
-  | `q`+`w` | `⇥` TAB | killed outer column |
+  | `s`+`d` | `⇥` TAB | killed outer column |
   | `l`+`;` | `'` quote | killed outer column |
   | `j`+`k` | `ESC` | (already exists) |
+  | `q`+`w` | `⇪` Caps Word | (new convenience — HRM Shift makes long caps awkward) |
+  | `l`+`;` *(CH layer)* | `_` underscore | CH outer column |
+  | `.`+`/` *(CH layer)* | `` ` `` backtick | CH outer column |
   | _tbd_ | `b` | trimmed inner-index |
   | _tbd_ | `n` | trimmed inner-index |
   | _tbd_ | one-shot **APPS** (Hyper) | killed Hyper/Alt thumb |
@@ -205,7 +237,7 @@ gone. Home-row mods are symmetric (same finger → same mod on both hands).
 |------|--------|---------|----------------|-------|
 | 1 | Symmetric HRM + drop top-row mods | 2026-06-15 | | Right home row now CTL/SFT/ALT/GUI on j/k/l/;; w/e top-row mods reverted to plain; Shift-on-Space thumb dropped (pulled fwd from Step 4) |
 | 2 | Pre-place TAB / BSPC / `'` | 2026-06-15 | | BSPC→left outer thumb; TAB→`qw` combo; `'`→`l;` combo. Base-layer TAB+`'` disabled early (rest of outer column still live) |
-| 3 | Disable outer pinky column | | | TAB + `'` already done in Step 2; remaining: `CTL`/`SFT`/`RALT` + old outer BSPC |
+| 3 | Disable outer pinky column | 2026-06-16 | | TAB + `'` done in Step 2; RALT corner disabled + 🌐 Globe moved to left thumb (`RALT_T(KC_BSPC)`, tap-only BSPC). Remaining: `LCTL`/`LSFT` + old outer BSPC |
 | 4 | Six thumbs → three | | | Hyper → one-shot Apps layer (`OSL(APPS)` on a combo) |
 | 5 | Trim inner index column | | | |
 
