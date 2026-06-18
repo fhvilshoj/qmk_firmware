@@ -124,18 +124,29 @@ chords with the NUM-layer arrows (window tiling = 🌐 + Ctrl + arrow).
 
 Current cluster: `GUI · MO(CH) · Ctrl/Enter` ‖ `Shift/Space · MO(NUM) · Hyper/Alt`
 
-- [ ] Re-map to layer-taps + tri-layer:
+- [ ] Re-map to layer-taps + tri-layer (**Globe ↔ CH swapped** — see note):
     ```
-    left  inner thumb:  LT(CH, KC_ENT)     // symbols on hold, Enter on tap
-    left  outer thumb:  RALT_T(KC_BSPC)    // Globe on hold / BSPC on tap — set in Step 3, untouched here
-    right thumb:        LT(NUM, KC_SPC)    // numbers on hold, Space on tap
+    left  outer thumb:  LT(CH, KC_BSPC)       // CH symbols on hold, BSPC on tap   ← CH took the Globe key
+    left  inner thumb:  MT(MOD_RALT, KC_ENT)  // 🌐 Globe on hold, Enter on tap     ← Globe took the CH/Enter key
+    right thumb:        LT(NUM, KC_SPC)        // numbers on hold, Space on tap
     FN layer:           tri-layer — hold CH + NUM together to reach FN
     ```
 - [ ] Disable the two now-unused thumb positions (`XXXXXXX`).
 
-_No conflict with the Step 3 Globe change: the left outer thumb is one of the three
-survivors — Step 4 only folds the layer-hold thumbs (`MO(CH)`, `Ctrl/Enter`,
-`MO(NUM)`, `Hyper/Alt`) into layer-taps. The Globe mod-tap rides through unchanged._
+**Globe ↔ CH swap (vs. the original plan).** CH is years-deep muscle memory, so it
+takes the **outer** thumb (today's Globe key) and Globe moves to the **inner** thumb
+(the Enter key). Only the _holds_ swap — the **taps stay put** (BSPC on outer, Enter
+on inner), so it's the smallest possible migration. Nothing prohibits it:
+
+- Globe is still a held mod → window tiling is unchanged: 🌐(inner thumb) + Ctrl(`f`)
+    - NUM(right thumb) + arrow — thumb+index, no collision.
+- The FN tri-layer only needs CH+NUM held; which thumb each sits on doesn't matter.
+- Globe-on-Enter-hold is the same tap-hold shape as today's Ctrl-on-Enter, and an
+  accidental Globe+key is _less_ destructive than the accidental Ctrl+key it replaces.
+
+_Gut-check: CH is more frequent than Globe and the outer thumb is a slightly longer
+reach than the inner — so the swap puts the busier key on the harder thumb. If the CH
+habit outweighs that (likely, after years), keep it; flipping back is a two-line change._
 
 _Shift-on-Space and Ctrl-on-Enter holds being dropped are already covered by the new symmetric home-row mods._
 
@@ -146,15 +157,14 @@ four-mod chord — tap a one-shot into a layer where each key sends the full Hyp
 With only 3 thumbs (all used) and the outer column gone, there's no spare key, so the
 one-shot lives on a **combo** — costing zero keys.
 
-- [ ] Leave the **left-outer thumb** as `RALT_T(KC_BSPC)` (Globe/BSPC, set in Step 3) — no further change needed here.
 - [ ] Trigger the Apps layer as a **one-shot on a combo** (tap combo → tap app → fires once):
     ```c
     // QMK: OSL(APPS) on a combo (define in keymap_combo.h / combo source)
     // ZMK: &sl APPS on a combo
     ```
     Default combo: a comfortable, low-misfire pair of **non-mod-tap** keys (e.g. `C`+`V`).
-    Avoid "both left thumbs" now that the left outer is a Globe mod-tap — chording it
-    is fiddlier than two plain keys. Combo position is easy to move — tune later.
+    Avoid "both left thumbs" — both are tap-hold keys now (CH-tap-BSPC and Globe-tap-Enter),
+    so chording them is fiddlier than two plain keys. Combo position is easy to move — tune later.
 - [ ] Add an `APPS` layer. Put **most-used apps on home row** as discrete Hyper combos;
       fill the rest so any key = `Hyper`+itself (keeps ad-hoc Hyper available):
     ```c
@@ -171,7 +181,7 @@ one-shot lives on a **combo** — costing zero keys.
     // one-shot trigger (combo):  &sl APPS
     // layer keys:  &kp HY(T)   &kp HY(S)   ...
     ```
-- [ ] Fill in actual app → key map: ************\_\_\_************
+- [ ] Fill in actual app → key map: \***\*\*\*\*\*\*\***\_\_\_\***\*\*\*\*\*\*\***
 
 _One-shot = tap, tap app, done — no hold, ideal for frequent single fires. For a run of
 several Hyper combos, tap the combo again each time (or add a hold/toggle variant later).
@@ -204,19 +214,19 @@ gone. Home-row mods are symmetric (same finger → same mod on both hands).
 ├───┼───┼───┼───┼───┤             ├───┼───┼───┼───┼───┤
 │ z │ x │ c │ v │   │             │   │ m │ , │ . │ / │
 ╰───┴───┴───┴───┴───╯             ╰───┴───┴───┴───┴───╯
-          ╭──────────┬────────╮ ╭────────╮
-          │ 🌐 · ⌫   │ ⏎ · CH │ │ ␣ · NUM│
-          ╰──────────┴────────╯ ╰────────╯
-          (2 left thumbs)        (1 right thumb)
+          ╭──────────┬─────────╮ ╭────────╮
+          │ ⌫ · CH   │ ⏎ · 🌐  │ │ ␣ · NUM│
+          ╰──────────┴─────────╯ ╰────────╯
+          (2 left thumbs)         (1 right thumb)
 ```
 
 - **Home-row mods** (hold): pinky=⌘ · ring=⌥ · middle=⇧ · index=⌃, both hands.
 - **Thumbs** (tap · hold):
-    - left outer → `⌫` BSPC (tap) · **🌐 Globe / RALT** (hold) — tap-only BSPC, no hold-repeat
-    - left inner → `⏎` Enter · hold = **CH** symbols layer
-    - right → `␣` Space · hold = **NUM** numbers/arrows layer
+    - left outer → `⌫` BSPC (tap) · **CH** symbols layer (hold) — tap-only BSPC, no hold-repeat
+    - left inner → `⏎` Enter (tap) · **🌐 Globe / RALT** (hold)
+    - right → `␣` Space (tap) · **NUM** numbers/arrows layer (hold)
     - hold **CH + NUM together** → **FN** layer (tri-layer)
-- **Window tiling** = 🌐(left thumb) + Ctrl(`f`) + NUM(right thumb) + arrow. macOS
+- **Window tiling** = 🌐(left inner thumb) + Ctrl(`f`) + NUM(right thumb) + arrow. macOS
   remaps Right-Alt → 🌐 in _Keyboard → Modifier Keys_; firmware just sends `RALT`.
 - **Combos** recover everything the lost keys did:
 
@@ -240,13 +250,13 @@ gone. Home-row mods are symmetric (same finger → same mod on both hands).
 
 ## Progress tracker
 
-| Step | Change                            | Started    | "Feels normal" | Notes                                                                                                                                                                                                                                              |
-| ---- | --------------------------------- | ---------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1    | Symmetric HRM + drop top-row mods | 2026-06-15 |                | Right home row now CTL/SFT/ALT/GUI on j/k/l/;; w/e top-row mods reverted to plain; Shift-on-Space thumb dropped (pulled fwd from Step 4)                                                                                                           |
-| 2    | Pre-place TAB / BSPC / `'`        | 2026-06-15 |                | BSPC→left outer thumb; TAB→combo (now on `sd`); `'`→`l;` combo. Base-layer TAB+`'` disabled early                                                                                                                                                  |
-| 3    | Disable outer pinky column        | 2026-06-16 |                | **Done 2026-06-17.** Outer column fully `XXXXXXX` on all 4 layers → logical 5-col board. 🌐 Globe→left thumb (`RALT_T(KC_BSPC)`, tap-only BSPC); F1/F12/QK*BOOT relocated inward on FN; `*`/`` ` ``→CH combos; TAB moved `qw`→`sd`; `qw`→Caps Word |
-| 4    | Six thumbs → three                |            |                | Hyper → one-shot Apps layer (`OSL(APPS)` on a combo)                                                                                                                                                                                               |
-| 5    | Trim inner index column           |            |                |                                                                                                                                                                                                                                                    |
+| Step | Change                            | Started    | "Feels normal"         | Notes                                                                                                                                                                                                                                              |
+| ---- | --------------------------------- | ---------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | Symmetric HRM + drop top-row mods | 2026-06-15 | Wednesday, 2026-Jun-17 | Right home row now CTL/SFT/ALT/GUI on j/k/l/;; w/e top-row mods reverted to plain; Shift-on-Space thumb dropped (pulled fwd from Step 4)                                                                                                           |
+| 2    | Pre-place TAB / BSPC / `'`        | 2026-06-15 |                        | BSPC→left outer thumb; TAB→combo (now on `sd`); `'`→`l;` combo. Base-layer TAB+`'` disabled early                                                                                                                                                  |
+| 3    | Disable outer pinky column        | 2026-06-16 |                        | **Done 2026-06-17.** Outer column fully `XXXXXXX` on all 4 layers → logical 5-col board. 🌐 Globe→left thumb (`RALT_T(KC_BSPC)`, tap-only BSPC); F1/F12/QK*BOOT relocated inward on FN; `*`/`` ` ``→CH combos; TAB moved `qw`→`sd`; `qw`→Caps Word |
+| 4    | Six thumbs → three                |            |                        | Hyper → one-shot Apps layer (`OSL(APPS)` on a combo)                                                                                                                                                                                               |
+| 5    | Trim inner index column           |            |                        |                                                                                                                                                                                                                                                    |
 
 ---
 
