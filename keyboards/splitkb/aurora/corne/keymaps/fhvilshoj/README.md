@@ -1,11 +1,13 @@
 
 ## Maps
 
-This keymap is mid-transition to a ~32-key Charlieflex model (see
+This keymap is mid-transition to a 34-key Koepckeae model (see
 `charlieflex-transition-plan.md`). **The outer pinky column is disabled
 (`XXXXXXX`) on every layer**, so the board is logically **5 columns per hand**.
-The diagrams below show only live keys. Thumbs are still 6 (the collapse to 3 is
-Step 4 — not done yet).
+The diagrams below show only live keys. Thumbs are now **4** (2L/2R) — the
+**outer** thumb of each side is disabled (Step 4 done), keeping the two closest
+thumbs per hand. This is the target mental model; only the Koepckeae's
+splay/thumb geometry is left to feel.
 
 Home-row mods are **symmetric** — same finger sends the same mod on both hands:
 pinky = ⌘ Cmd, ring = ⌥ Opt, middle = ⇧ Shift, index = ⌃ Ctrl.
@@ -17,6 +19,7 @@ pinky = ⌘ Cmd, ring = ⌥ Opt, middle = ⇧ Shift, index = ⌃ Ctrl.
 | `j`+`k` | `ESC` | |
 | `s`+`d` | `⇥` TAB | home-row, base layer |
 | `l`+`;` | `'` quote | base layer |
+| `j`+`l` | `⌫` Backspace | tap = delete; **hold = repeat** (OS typematic) |
 | `q`+`w` | `⇪` Caps Word | auto-cancels at end of word; keeps `_`/digits |
 | `l`+`;` | `_` underscore | **CH layer only** |
 | `.`+`/` | `` ` `` backtick | **CH layer only** |
@@ -25,16 +28,19 @@ pinky = ⌘ Cmd, ring = ⌥ Opt, middle = ⇧ Shift, index = ⌃ Ctrl.
 
 | Thumb | Tap | Hold |
 |-------|-----|------|
-| left outer | `⌫` Backspace | 🌐 Globe (`RALT`) |
+| left outer | *(disabled)* | *(disabled)* |
 | left mid | — | `CH` symbol layer |
-| left inner | `⏎` Enter | ⌃ Ctrl |
-| right inner | `␣` Space | — |
-| right mid | — | `NUM` number/arrow layer |
-| right outer | `⌥` Alt | ✦ Hyper (Ctrl+Alt+Shift+Gui) |
+| left inner | `⏎` Enter | 🌐 Globe (`RALT`) |
+| right inner | `␣` Space | `NUM` number/arrow layer |
+| right mid | `⌥` Alt | ✦ Hyper (Ctrl+Alt+Shift+Gui) |
+| right outer | *(disabled)* | *(disabled)* |
+
+Hold **CH + NUM together** → `FN` layer (tri-layer). Backspace is the `j`+`l`
+combo (tap = delete, hold = repeat); it left the thumbs entirely in Step 4.
 
 🌐 Globe: macOS remaps Right-Alt → 🌐 in *Keyboard → Modifier Keys*, so the
-firmware just sends `RALT`. Window tiling = 🌐(left thumb) + Ctrl(`f`, also a mod
-on NUM) + NUM(right thumb) + arrow. Backspace is **tap-only** (the hold is Globe).
+firmware just sends `RALT`. Window tiling = 🌐(left-inner thumb) + Ctrl(`f`, also
+a mod on NUM) + NUM(right-inner thumb) + arrow.
 
 ### BASE LAYER
 
@@ -48,9 +54,12 @@ on NUM) + NUM(right thumb) + arrow. Backspace is **tap-only** (the hold is Globe
 │ z │ x │ c │ v │ b │     │ n │ m │ , │ . │ / │
 ╰───┴───┴───┴───┴───╯     ╰───┴───┴───┴───┴───╯
    ╭──────┬──────┬──────╮   ╭──────┬──────┬──────╮
-   │ 🌐⌫  │  CH  │  ⌃⏎  │   │  ␣   │ NUM  │ ⌥Hyp │
+   │  ··  │  CH  │ 🌐⏎  │   │ ␣NUM │ ⌥Hyp │  ··  │
    ╰──────┴──────┴──────╯   ╰──────┴──────┴──────╯
 ```
+
+`··` = disabled outer thumb. Tap/hold: CH=hold · 🌐⏎=Enter tap/Globe hold ‖
+␣NUM=Space tap/NUM hold · ⌥Hyp=Alt tap/Hyper hold.
 
 ### NUMBERS AND ARROWS (NUM)
 
@@ -63,12 +72,12 @@ on NUM) + NUM(right thumb) + arrow. Backspace is **tap-only** (the hold is Globe
 │   │   │   │   │   │     │   │   │   │   │   │
 ╰───┴───┴───┴───┴───╯     ╰───┴───┴───┴───┴───╯
    ╭──────┬──────┬──────╮   ╭──────┬──────┬──────╮
-   │  ⌘   │  FN  │  ⏎   │   │  ␣   │(NUM) │  ⌥   │
+   │  ··  │  CH  │ 🌐⏎  │   │(NUM) │ ⌥Hyp │  ··  │
    ╰──────┴──────┴──────╯   ╰──────┴──────┴──────╯
 ```
 
 Left home row keeps the GASC mods (so Ctrl on `f` is available for 🌐+Ctrl+arrow
-window tiling). `FN` layer = hold the left-mid thumb here, or NUM+CH together.
+window tiling). `FN` layer = hold CH + NUM together (tri-layer).
 
 ### SPECIAL CHARACTERS (CH)
 
@@ -81,7 +90,7 @@ window tiling). `FN` layer = hold the left-mid thumb here, or NUM+CH together.
 │   │   │   │   │   │     │ ~ │ + │ { │ } │ \ │
 ╰───┴───┴───┴───┴───╯     ╰───┴───┴───┴───┴───╯
    ╭──────┬──────┬──────╮   ╭──────┬──────┬──────╮
-   │  ⌘   │ (CH) │  ⏎   │   │  ␣   │  FN  │  ⌥   │
+   │  ··  │ (CH) │ 🌐⏎  │   │ ␣NUM │ ⌥Hyp │  ··  │
    ╰──────┴──────┴──────╯   ╰──────┴──────┴──────╯
 ```
 
@@ -90,7 +99,7 @@ the now-removed outer column.
 
 ### FUNCTION KEYS AND MOUSE (FN)
 
-Reached by holding NUM + CH together (or the FN thumb from NUM/CH).
+Reached by holding CH + NUM together (tri-layer).
 
 ```
 ╭────┬────┬────┬────┬────╮     ╭────┬────┬────┬─────┬─────╮

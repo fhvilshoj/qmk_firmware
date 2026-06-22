@@ -2,6 +2,7 @@ COMB(JK_ESC,  KC_ESC,   RCTL_T(KC_J), RSFT_T(KC_K))
 COMB(QW_CAPS,  CW_TOGG,  KC_Q, KC_W)
 COMB(SD_TAB,  KC_TAB,   LALT_T(KC_S), LSFT_T(KC_D))
 COMB(LSCLN_QUOT,  KC_QUOT,  RALT_T(KC_L), RGUI_T(KC_SCLN))
+COMB(JL_BSPC,  KC_BSPC,  RCTL_T(KC_J), RALT_T(KC_L))  // tap = BSPC; hold = repeat (OS typematic)
 // CH-layer only: keycodes below exist solely on the CH (symbol) layer,
 // so these combos can't fire on base/NUM. l;=_, ./=`
 COMB(CH_UNDS,  KC_UNDS,  KC_RBRC, KC_MINS)
