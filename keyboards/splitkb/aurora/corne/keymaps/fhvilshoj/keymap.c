@@ -51,8 +51,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[FN] = LAYOUT_split_3x6_3(
 	        XXXXXXX, KC_F2,   KC_F3,        KC_F4,              KC_F5,              KC_F6,                          KC_F7,   KC_F8,   KC_F9,   KC_F10,   KC_F11,  XXXXXXX,
-	        XXXXXXX, KC_F1,   KC_KB_MUTE,   KC_KB_VOLUME_DOWN,  KC_KB_VOLUME_UP,    XXXXXXX,                        KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, KC_F12,  XXXXXXX,
-	        XXXXXXX, QK_BOOT, XXXXXXX,      KC_BRIGHTNESS_DOWN, KC_BRIGHTNESS_UP,   XXXXXXX,                        XXXXXXX, KC_BTN1, KC_BTN2, XXXXXXX, XXXXXXX, XXXXXXX,
+	        XXXXXXX, KC_F1,   KC_KB_MUTE,   KC_KB_VOLUME_DOWN,  KC_KB_VOLUME_UP,    XXXXXXX,                        MS_LEFT, MS_DOWN, MS_UP, MS_RGHT, KC_F12,  XXXXXXX,
+	        XXXXXXX, QK_BOOT, XXXXXXX,      KC_BRIGHTNESS_DOWN, KC_BRIGHTNESS_UP,   XXXXXXX,                        XXXXXXX, MS_BTN1, MS_BTN2, XXXXXXX, XXXXXXX, XXXXXXX,
 	                                                            XXXXXXX, _______, _______,   _______, _______, XXXXXXX
 	      ),
 };
